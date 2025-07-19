@@ -38,7 +38,7 @@ const About = () => {
     async function fetchData() {
       try {
         const response = await fetchDataFromCMS("/api/about");
-        const parsed: Paragraph[] = response.data.attributes.description;
+        const parsed: Paragraph[] = response.data.description;
         setDescription(parsed);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -49,13 +49,13 @@ const About = () => {
 
   // step 2: parse response and render
   return (
-    <div className={styles["container"]}>
+    <section className={styles["container"]}>
       {description ? (
         parseResponse(description)
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </section>
   );
 };
 
