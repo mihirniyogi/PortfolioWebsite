@@ -5,19 +5,16 @@ import fetchDataFromCMS from "../../utils/fetchDataFromCMS";
 
 type ResponseFormat = {
   data: {
-    attributes: {
-      Title: string;
-      Description: string;
-      image?: {
-        data?: {
-          attributes?: {
-            url?: string;
-          }
-        }
-      };
-      technologies: string[];
-      githubLink?: string;
-      liveLink?: string;
+    title: string;
+    description: string;
+    githubLink?: string;
+    liveLink?: string;
+    technologies: {
+      id: number;
+      name: string;
+    }[];
+    image?: {
+      url: string;
     }
   }[];
 }
@@ -42,16 +39,15 @@ const Projects = () => {
         const response = await fetchDataFromCMS("/api/projects?populate=*") as ResponseFormat;
         const BASE_URL = import.meta.env.VITE_STRAPI_API_URL;
         const projects: Project[] = response.data.map((item) => ({
-          title: item.attributes["Title"],
-          desc: item.attributes["Description"],
-          image: item.attributes["image"]?.data?.attributes?.url
-            ? `${BASE_URL}${item.attributes["image"].data.attributes.url}`
+          title: item["title"],
+          desc: item["description"],
+          image: item["image"]?.url
+            ? `${BASE_URL}${item["image"].url}`
             : '',
-          technologies: item.attributes["technologies"],
-          githubLink: item.attributes["githubLink"],
-          liveLink: item.attributes["liveLink"],
+          technologies: item["technologies"].map((tech) => tech.name),
+          githubLink: item["githubLink"],
+          liveLink: item["liveLink"],
         }));
-        console.log("Projects fetched:", projects);
         setProjects(projects);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -63,7 +59,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <h2>Projects</h2>
 
       <div className={styles.cardsSection}>
@@ -79,7 +75,7 @@ const Projects = () => {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
