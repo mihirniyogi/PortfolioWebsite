@@ -1,0 +1,132 @@
+@import "../../index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 5rem;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: "Fira Code", monospace;
+    color: var(--faded-black);
+    padding: 0.5rem 1rem;
+    background-color: var(--sun-yellow);
+    border: 2px solid black;
+    box-shadow: 4px 4px 0px black;
+    margin-top: 3rem;
+    text-align: center;
+
+    @include respond("md") {
+      width: fit-content;
+    }
+  }
+}
+
+.tabgroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0rem;
+
+    button {
+      flex: 1 1 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Fira Code', monospace;
+      background-color: var(--cream);
+      color: var(--faded-black);
+      border: 2px solid black;
+      padding: 0.5rem 1rem;
+      box-shadow: 2px 2px 0px black;
+      transition: box-shadow 0.1s ease, transform 0.1s ease;
+
+      &:hover {
+        box-shadow: 1px 1px 0px black;
+        transform: translateX(1px) translateY(1px);
+      }
+
+      &.active {
+        box-shadow: none;
+        transform: translateX(2px) translateY(2px);
+        background-color: var(--sun-yellow);
+        font-weight: 600;
+      }
+
+      @include respond("md") {
+        flex: 0 1 auto; // fit content when md
+      }
+    }
+}
+
+.experienceList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 1rem;
+
+  .experience {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include respond("md") {
+      flex-direction: row;
+    }
+
+    .dates {
+      
+      @include respond("md") {
+        flex: 0 0 20%;
+        max-width: 20%;
+      }
+
+      p {
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: "Fira Code", monospace;
+        color: var(--faded-black);
+        margin: 0;
+      }
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        font-family: "Fira Code", monospace;
+        color: var(--faded-black);
+        margin: 0;
+      }
+
+      .company {
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: "Fira Code", monospace;
+        color: var(--faded-black);
+        margin: 0;
+      }
+
+      .description {
+        display: none;
+        font-size: 0.75rem;
+        font-weight: 400;
+        font-family: "Fira Code", monospace;
+        color: var(--faded-black);
+        margin: 0;
+        margin-top: 0.2rem;
+
+        @include respond("md") {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
