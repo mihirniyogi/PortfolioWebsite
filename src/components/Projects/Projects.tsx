@@ -59,7 +59,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className={styles.container}>
+    <section id="projects" className={styles.container}>
       <h2>Projects</h2>
 
       <div className={styles.cardsSection}>
