@@ -24,7 +24,7 @@ type ResponseFormat = {
     end?: string;
     role: string;
     organisation: string;
-    description: string;
+    description?: string;
     visible: boolean;
   }[];
 }
@@ -34,7 +34,7 @@ type WorkExperience = {
   end?: string;
   role: string;
   organisation: string;
-  description: string;
+  description?: string;
 }
 
 type VolunteeringExperience = {
@@ -42,7 +42,7 @@ type VolunteeringExperience = {
   end?: string;
   role: string;
   organisation: string;
-  description: string;
+  description?: string;
 }
 
 
@@ -93,7 +93,7 @@ const Experience = () => {
   }, []);
 
   return (
-    <section className={styles.container}>
+    <section id="experience" className={styles.container}>
       <h2>Experience</h2>
 
       <div className={styles.tabgroup}>

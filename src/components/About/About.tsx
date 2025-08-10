@@ -49,13 +49,15 @@ const About = () => {
 
   // step 2: parse response and render
   return (
-    <section className={styles["container"]}>
-      {description ? (
-        parseResponse(description)
-      ) : (
-        <p>Loading...</p>
-      )}
-    </section>
+    <section className={styles["container"]
+    }>
+      {
+        description ? (
+          parseResponse(description)
+        ) : (
+          <p>Loading...</p>
+        )}
+    </section >
   );
 };
 
