@@ -1,22 +1,43 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+// src/layouts/Layout.astro
+const { title } = Astro.props;
+import { ClientRouter } from 'astro:transitions';
+---
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{title} | Mihir Niyogi</title>
+        <ClientRouter /> </head>
+    </head>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <body>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/projects">Projects</a>
+            <a href="/experience">Experience</a>
+            <a href="/contact">Contact</a>
+            <a href="/resume">Resume</a>
+        </nav>
+
+        <main><slot /></main>
+
+        <style is:global>
+            /* Off-white theme */
+            body {
+                background-color: #f9f9f9;
+                color: #222;
+                font-family: sans-serif;
+                max-width: 800px;
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+
+            nav { margin-bottom: 40px; }
+            a { margin-right: 15px; color: #666; text-decoration: none; }
+            a:hover { color: #000; }
+            
+        </style>
+
+    </body>
+</html>
