@@ -12,30 +12,25 @@ import { ClientRouter } from 'astro:transitions';
     </head>
 
     <body>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/experience">Experience</a>
-            <a href="/contact">Contact</a>
-            <a href="/resume">Resume</a>
-        </nav>
 
         <main><slot /></main>
 
         <style is:global>
-            /* Off-white theme */
             body {
-                background-color: #f9f9f9;
-                color: #222;
-                font-family: sans-serif;
-                max-width: 800px;
-                margin: 40px auto;
-                padding: 0 20px;
+                font-family: sans-serif; 
+                display: flex; 
+                flex-direction: column;
+                justify-content: center; 
+                align-items: center; 
+                height: 100vh; 
+                background: #f9f9f9; 
+                color: #222; 
+                text-align: center;
             }
 
             nav { margin-bottom: 40px; }
-            a { margin-right: 15px; color: #666; text-decoration: none; }
-            a:hover { color: #000; }
+            h1 { font-weight: 700; letter-spacing: -1px}
+            p { color: #666; font-size: 1.2rem; }
             
         </style>
 
