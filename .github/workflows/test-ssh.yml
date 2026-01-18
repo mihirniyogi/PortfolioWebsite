@@ -24,6 +24,12 @@ jobs:
       - name: Install cloudflared
         run: |
           curl -fsSL https://developers.cloudflare.com/cloudflare-one/static/install-cloudflared.sh | sudo bash
+          sudo ln -s /usr/local/bin/cloudflared /usr/bin/cloudflared
+
+      - name: Debug cloudflared
+        run: |
+          which cloudflared
+          cloudflared --version
 
       - name: Setup SSH
         run: |
