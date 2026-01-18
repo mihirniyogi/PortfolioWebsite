@@ -8,11 +8,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Cloudflare CLI
-        run: |
-          curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-          sudo dpkg -i cloudflared.deb
-
       - name: SSH via Cloudflare Tunnel
         uses: and-fm/cloudflared-ssh-action@v3
         with:
@@ -24,5 +19,8 @@ jobs:
           service_token_id: ${{ secrets.CF_CLIENT_ID }}
           service_token_secret: ${{ secrets.CF_CLIENT_SECRET }}
           commands: |
-            echo "Connection successful!"
+            echo "Successfully bypassed Cloudflare Zero Trust!"
+            echo "Current RPi Uptime:"
             uptime
+            echo "Testing directory access:"
+            ls -la
