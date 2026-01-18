@@ -32,13 +32,6 @@ jobs:
           EOF
 
       - name: Debug SSH
-        env:
-          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
-          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
-        run: ssh -vvv ${{ secrets.RPI_HOST }} "echo SSH_OK"
-
-      - name: Optional dry-run SCP
-        env:
-          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
-          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
-        run: scp -v /dev/null ${{ secrets.RPI_HOST }}:/tmp/testfile.txt
+        run: |
+          cloudflared --version
+          ssh -vv -o ConnectTimeout=30 ${{ secrets.RPI_HOST }} "echo 'Connection Successful! Running as user: $(whoami)'"
