@@ -33,5 +33,4 @@ jobs:
 
       - name: Debug SSH
         run: |
-          cloudflared --version
-          ssh -vv -o ConnectTimeout=30 ${{ secrets.RPI_HOST }} "echo 'Connection Successful! Running as user: $(whoami)'"
+          ssh ${{ secrets.RPI_HOST }} "ls -la /home/${{ secrets.RPI_USER }} && uname -a"
