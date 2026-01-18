@@ -8,14 +8,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Cloudflare CLI
+        run: |
+          curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared.deb
+
       - name: SSH via Cloudflare Tunnel
-        uses: appleboy/ssh-action@v1.2.4
+        uses: and-fm/cloudflared-ssh-action@v3
         with:
-          host: ssh.mihirniyogi.com
+          host: ${{ secrets.REMOTE_HOST }}
+          port: ${{ secrets.REMOTE_PORT }}
           username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          proxy_command: |
-            curl -s --header "CF-Access-Client-Id: ${{ secrets.CF_CLIENT_ID }}" --header "CF-Access-Client-Secret: ${{ secrets.CF_CLIENT_SECRET }}" https://ssh.mihirniyogi.com/cdn-cgi/access/ssh
-          script: |
-            echo "Successfully tunneled through Cloudflare!"
+          private_key_filename: id_ed25519
+          private_key_value: ${{ secrets.SSH_PRIVATE_KEY }}
+          service_token_id: ${{ secrets.CF_CLIENT_ID }}
+          service_token_secret: ${{ secrets.CF_CLIENT_SECRET }}
+          commands: |
+            echo "Connection successful!"
             uptime
