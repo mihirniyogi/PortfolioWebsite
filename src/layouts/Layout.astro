@@ -15,24 +15,7 @@ import Navigation from '../components/Navigation.astro';
     </head>
 
     <body>
-
         <Navigation />
-
         <main><slot /></main>
-
-        <style is:global>
-            body {
-                display: flex; 
-                flex-direction: column;
-                align-items: center; 
-                text-align: center;
-                border: 1px solid red;
-            }
-
-            h1 { font-weight: 700; font-size: var(--fs-xl);   }
-            p { color: var(--text-muted); font-size: 1.2rem; }
-            
-        </style>
-
     </body>
 </html> 

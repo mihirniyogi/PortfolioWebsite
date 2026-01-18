@@ -78,10 +78,13 @@ body {
 }
 
 .container {
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--space-unit);
-    padding-right: var(--space-unit);
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 5vh;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
 }

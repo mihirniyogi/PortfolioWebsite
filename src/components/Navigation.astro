@@ -15,14 +15,17 @@ const currentPath = pathname.replace(/\/$/, "");
 <style>
 
     nav {
-        padding: 1.5rem 0;
+        display: flex;
+        justify-content: center;
+        padding: 2rem 0;
+
     }
 
     .links {
         display: flex;
         gap: 2rem;
+        justify-content: flex-start;
     }
-
 
     a {
         text-decoration: none;
@@ -32,15 +35,16 @@ const currentPath = pathname.replace(/\/$/, "");
         padding: 0.5rem 0;
     }
 
-    a:hover {
+    a:not(.active):hover {
         color: var(--accent);
         transform: translateY(-1px);
     }
 
     a.active {
         color: var(--accent);
-        font-weight: 600;
+        font-weight: 400;
         position: relative;
+        cursor: default;
     }
 
     a.active::after {

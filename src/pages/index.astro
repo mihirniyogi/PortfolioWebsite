@@ -4,9 +4,81 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Mihir Niyogi">
+    <section class="container">
+        <span class="greeting">Hi, I'm</span>
+        <h1>Mihir Niyogi</h1>
+        
+        <p class="bio">
+            I'm a <strong>Software Developer</strong> based in Singapore, 
+            with a focus on web development. I spend my time 
+            tinkering with <em>self-hosting</em> and exploring 
+            new technologies.
+        </p>
+        <div class="pi-notice">
+            <span class="icon">💡</span>
+            <p>This website is being served from my <strong>Raspberry Pi</strong> (a tiny computer) at home.</p>
+        </div>
 
-    <main class="container">
-        <h1>Home</h1>
-    </main>
-
+    </section>
 </Layout>
+
+<style>
+    .greeting {
+        display: block;
+        font-size: var(--fs-lg);
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+    }
+
+    h1 {
+        font-size: var(--fs-xxl);
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+    }
+
+    .bio {
+        font-size: var(--fs-md);
+        color: var(--text-muted);
+        max-width: 50ch;
+    }
+
+    strong {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    em {
+        font-style: italic;
+        color: var(--accent);
+    }
+
+    .pi-notice {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        padding: 1rem 1.25rem;
+        
+        background-color: rgba(37, 99, 235, 0.05);
+        border: 1px solid rgba(37, 99, 235, 0.1);
+        border-radius: 8px;
+        max-width: fit-content;
+    }
+
+    .pi-notice .icon {
+        font-size: 1.25rem;
+        filter: drop-shadow(0 0 5px rgba(255, 200, 0, 0.4));
+    }
+
+    .pi-notice p {
+        font-size: var(--fs-sm);
+        color: var(--text-main);
+        margin: 0; 
+    }
+
+    .pi-notice strong {
+        color: var(--accent);
+    }
+    
+</style>
