@@ -11,16 +11,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install and build project
-        run: |
-          npm install
-          npm run build
-
       - name: Install cloudflared
         run: |
           curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
@@ -41,12 +31,18 @@ jobs:
           Host rpi
             HostName ssh.mihirniyogi.com
             User pi
-            ProxyCommand cloudflared access ssh --hostname %h
+            ProxyCommand cloudflared access ssh --hostname %h --token $CF_CLIENT_ID:$CF_CLIENT_SECRET
             StrictHostKeyChecking no
           EOF
 
       - name: Debug SSH
+        env:
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: ssh -vvv rpi "echo SSH_OK"
 
-      - name: Test SCP
+      - name: Optional dry-run SCP
+        env:
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: scp -v /dev/null rpi:/tmp/testfile.txt
