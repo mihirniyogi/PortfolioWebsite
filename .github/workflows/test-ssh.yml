@@ -1,21 +1,21 @@
 name: Test SSH Connection
-on: [push] # This triggers the test every time you push code
+on: [push]
 
 jobs:
   test-connection:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Try to talk to the Pi
-        uses: appleboy/ssh-action@v1.0.3
+      - name: SSH via Cloudflare Tunnel
+        uses: appleboy/ssh-action@v1.2.4
         with:
-          host: ${{ secrets.REMOTE_HOST }}
+          host: ssh.mihirniyogi.com
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
+          proxy_command: |
+            curl -s --header "CF-Access-Client-Id: ${{ secrets.CF_CLIENT_ID }}" --header "CF-Access-Client-Secret: ${{ secrets.CF_CLIENT_SECRET }}" https://ssh.mihirniyogi.com/cdn-cgi/access/ssh
           script: |
-            echo "Hello from the GitHub Robot!"
-            uname -a
+            echo "Successfully tunneled through Cloudflare!"
             uptime
