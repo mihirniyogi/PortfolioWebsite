@@ -1,0 +1,58 @@
+---
+const { pathname } = Astro.url;
+const currentPath = pathname.replace(/\/$/, "");
+---
+
+<nav>
+    <div class="links">
+        <a href="/" class={currentPath === "" ? "active" : ""}>Home</a>
+        <a href="/projects" class={currentPath === "/projects" ? "active" : ""}>Projects</a>
+        <a href="/experience" class={currentPath === "/experience" ? "active" : ""}>Experience</a>
+        <a href="/contact" class={currentPath === "/contact" ? "active" : ""}>Contact</a>
+    </div>
+</nav>
+
+<style>
+
+    nav {
+        padding: 1.5rem 0;
+    }
+
+    .links {
+        display: flex;
+        gap: 2rem;
+    }
+
+
+    a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 400;
+        transition: color 0.2s ease, transform 0.2s ease;
+        padding: 0.5rem 0;
+    }
+
+    a:hover {
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    a.active {
+        color: var(--accent);
+        font-weight: 600;
+        position: relative;
+    }
+
+    a.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background-color: var(--accent);
+        border-radius: 50%;
+    }
+
+</style>

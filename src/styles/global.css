@@ -1,0 +1,87 @@
+/* src/styles/global.css */
+
+/* --- Reset, Remove Default Styles --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+/* --- Fonts --- */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter.woff2') format('woff2-variations'),
+        url('/fonts/Inter.woff2') format('woff2'); /* Fallback */
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter_Italics.woff2') format('woff2-variations'),
+        url('/fonts/Inter_Italics.woff2') format('woff2'); /* Fallback */
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: italic;
+}
+
+/* --- Design Tokens --- */
+:root {
+    /* Colors */
+    --bg-color: hsl(210, 20%, 98%);
+    --text-main: hsl(210, 20%, 15%);
+    --text-muted: hsl(210, 10%, 40%);
+    --accent: hsl(220, 90%, 56%); /* A nice clean blue */
+    
+    /* Font sizes (responsive) */
+    --fs-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
+    --fs-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+    --fs-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+    --fs-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+    --fs-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+    --fs-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+
+    /* Font family */
+    --font-main: 'Inter', system-ui, sans-serif;
+
+    /* Spacing */
+    --space-unit: 1rem;
+}
+
+/* Base Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+    font-size: var(--fs-base);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-unit);
+    padding-right: var(--space-unit);
+}

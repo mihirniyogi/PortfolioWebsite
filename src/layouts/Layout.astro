@@ -2,8 +2,11 @@
 // src/layouts/Layout.astro
 const { title } = Astro.props;
 import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
 ---
-<html>
+
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
@@ -13,26 +16,23 @@ import { ClientRouter } from 'astro:transitions';
 
     <body>
 
+        <Navigation />
+
         <main><slot /></main>
 
         <style is:global>
             body {
-                font-family: sans-serif; 
                 display: flex; 
                 flex-direction: column;
-                justify-content: center; 
                 align-items: center; 
-                height: 100vh; 
-                background: #f9f9f9; 
-                color: #222; 
                 text-align: center;
+                border: 1px solid red;
             }
 
-            nav { margin-bottom: 40px; }
-            h1 { font-weight: 700; letter-spacing: -1px}
-            p { color: #666; font-size: 1.2rem; }
+            h1 { font-weight: 700; font-size: var(--fs-xl);   }
+            p { color: var(--text-muted); font-size: 1.2rem; }
             
         </style>
 
     </body>
-</html>
+</html> 
