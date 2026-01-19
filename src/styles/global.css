@@ -78,7 +78,7 @@ body {
 }
 
 .container {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
     margin-top: 5vh;
 }
@@ -88,3 +88,16 @@ body {
         width: 90%;
     }
 }
+
+/* 
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: hsl(210, 20%, 5%);    Deep charcoal/black 
+    --text-main: hsl(210, 20%, 90%);  Soft white 
+    --text-muted: hsl(210, 10%, 65%); Muted gray 
+    --accent: hsl(210, 100%, 70%);    Slightly brighter blue for dark bg 
+  }
+}
+
+*/

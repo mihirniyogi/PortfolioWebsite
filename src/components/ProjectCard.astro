@@ -1,0 +1,151 @@
+---
+// src/components/ProjectCard.astro
+interface Props {
+    title: string;
+    description: string;
+    tags: string[];
+    link: string;
+    image?: string;
+}
+
+const { title, description, tags, link, image } = Astro.props;
+---
+
+<li class="project-card">
+
+    <div class="card-content">
+        <h3>{title}</h3>
+        <p>{description}</p>
+
+        <div class="card-techstack">
+            {tags.map(tag => (
+                <span class="tag">{tag}</span>
+            ))}
+        </div>
+
+        <div class="card-links">
+            <a href={link} target="_blank" rel="noopener noreferrer">View Code</a>
+        </div>
+    </div>
+
+    <div class="card-image">
+        {image && <img src={image} alt={`${title} screenshot`} loading="lazy" />}
+    </div>
+
+</li>
+
+<style>
+    .project-card {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: center;
+        list-style: none;
+
+        margin-top: 2rem;
+        padding: 3rem;
+        border: 1px solid color-mix(in srgb, var(--text-main), transparent 75%);
+        border-radius: 24px;
+        box-shadow: 0 10px 30px -5px color-mix(in srgb, var(--text-main), transparent 95%);
+        background-color: var(--bg-color);
+        transition: all 0.3s ease;
+    }
+
+    .project-card:nth-child(even) {
+        /* Swaps the order of the grid items */
+        grid-template-columns: 1.2fr 1fr;
+    }
+
+    .project-card:nth-child(even) .card-image {
+        order: 1; /* Moves image to the right */
+    }
+
+    .project-card:nth-child(even) .card-content {
+        order: 2; /* Moves text to the left */
+    }
+
+    .card-image {
+        width: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: color-mix(in srgb, var(--accent), transparent 95%);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid red;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+    .project-card:hover .card-image {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+        border-color: var(--accent);
+        box-shadow: 0 20px 40px -10px color-mix(in srgb, var(--accent), transparent 90%);
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    h3 {
+        font-size: var(--fs-lg);
+        color: var(--text-main);
+        margin: 0;
+    }
+
+    p {
+        font-size: var(--fs-base);
+        color: var(--text-muted);
+    }
+
+    /* Tech Stack Tags */
+    .card-techstack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .tag {
+        font-size: var(--fs-sm);
+        background: color-mix(in srgb, var(--accent), transparent 80%);
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        border: 1px solid color-mix(in srgb, var(--accent), transparent 90%);
+        color: var(--text-muted);
+    }
+
+    .card-links {
+        margin-top: 1rem;
+    }
+
+    .card-links a {
+        text-decoration: none;
+        font-weight: 300;
+        font-size: var(--fs-base);
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 2px;
+        transition: opacity 0.2s ease;
+    }
+    
+    @media (max-width: 850px) {
+        .project-card, .project-card:nth-child(even) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .project-card:nth-child(even) .card-image,
+        .project-card:nth-child(even) .card-content {
+            order: unset;
+        }
+    }
+
+</style>
