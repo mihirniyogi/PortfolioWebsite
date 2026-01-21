@@ -1,14 +1,17 @@
 ---
+import Image from 'astro/components/Image.astro';
+
 // src/components/ProjectCard.astro
 interface Props {
     title: string;
     description: string;
     tags: string[];
-    link: string;
+    link?: string;
     image?: string;
+    inProgress?: boolean;
 }
 
-const { title, description, tags, link, image } = Astro.props;
+const { title, description, tags, link, image, inProgress = false } = Astro.props;
 ---
 
 <li class="project-card">
@@ -24,12 +27,30 @@ const { title, description, tags, link, image } = Astro.props;
         </div>
 
         <div class="card-links">
-            <a href={link} target="_blank" rel="noopener noreferrer">View Code</a>
+            {link && <a href={link} target="_blank" rel="noopener noreferrer">View Code</a>}
         </div>
     </div>
 
     <div class="card-image">
-        {image && <img src={image} alt={`${title} screenshot`} loading="lazy" />}
+
+        {inProgress && (
+            <div class="status-badge">
+                <span class="dot"></span>
+                In Progress
+            </div>
+        )}
+
+        {image ? (
+            typeof image === 'string' ? 
+            <img src={image} alt={title} loading="lazy" /> : 
+            <Image src={image} alt={title} width={800} height={450} format="webp" />
+        ) : (
+            <div class="placeholder-bg">
+                <div class="blueprint-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11V6m0 0L9 9m3-3l3 3m-3 10v-5m0 0l-3 3m3-3l3 3M5 12h14"/></svg>
+                </div>
+            </div>
+        )}
     </div>
 
 </li>
@@ -52,33 +73,101 @@ const { title, description, tags, link, image } = Astro.props;
     }
 
     .project-card:nth-child(even) {
-        /* Swaps the order of the grid items */
         grid-template-columns: 1.2fr 1fr;
     }
 
     .project-card:nth-child(even) .card-image {
-        order: 1; /* Moves image to the right */
+        order: 1;
     }
 
     .project-card:nth-child(even) .card-content {
-        order: 2; /* Moves text to the left */
+        order: 2;
     }
 
     .card-image {
+        position: relative;
         width: 100%;
+        aspect-ratio: 4 / 3;
         border-radius: 16px;
         overflow: hidden;
-        background-color: color-mix(in srgb, var(--accent), transparent 95%);
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid red;
+    }
+
+    .status-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.4rem;
+        background: color-mix(in srgb, var(--accent), transparent 10%);
+        border-radius: 100px;
+        color: white;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+        background-color: #fbbf24;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #fbbf24;
+        animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;    
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.2; transform: scale(0.9); }
+    }
+
+    .placeholder-bg {
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+        background-color: color-mix(in srgb, var(--accent), transparent 95%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .placeholder-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.1;
+        background-size: 20px 20px;
+        background-image: 
+            linear-gradient(to right, var(--text-muted) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--text-muted) 1px, transparent 1px);
+    }
+
+    .blueprint-icon {
+        color: var(--accent);
+        opacity: 0.5;
+        z-index: 1;
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .blueprint-icon {
+        transform: rotate(90deg) scale(1.2);
+        opacity: 0.8;
     }
 
     .card-image img {
         width: 100%;
-        height: auto;
-        display: block;
+        height: 100%;
         object-fit: cover;
+        object-position: top;
+        display: block;
     }
 
     .project-card:hover .card-image {
@@ -105,7 +194,6 @@ const { title, description, tags, link, image } = Astro.props;
         color: var(--text-muted);
     }
 
-    /* Tech Stack Tags */
     .card-techstack {
         display: flex;
         flex-wrap: wrap;
