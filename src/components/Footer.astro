@@ -1,11 +1,17 @@
 ---
 // src/components/Footer.astro
+import packageInfo from '../../package.json';
+const version = packageInfo.version;
 ---
 
 <footer class="container footer">
     <div class="footer-credits">
         <p class="copyright">Copyright &copy; { 2026 } Mihir Niyogi</p>
-        <p class="made-with">Made with ❤️ & ☕</p>
+        <p class="made-with">Made with ❤️ & ☕ 
+            <a href="https://github.com/mihirniyogi/PortfolioWebsite" target="_blank" class="version-link">
+                <span>v{version}</span> 
+            </a>
+        </p>
     </div>
 
     <div class="footer-links">
@@ -27,7 +33,7 @@
     .footer {
         background-color: #f8f9fa;
         text-align: center;
-        font-size: 14px;
+        font-size: 0.85rem;
         color: #6c757d;
         display: flex;
         flex-direction: column;
@@ -71,6 +77,22 @@
         text-decoration: none;
         display: flex;
         align-items: center;
+    }
+
+    .version-link {
+        display: inline;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        transition: color 0.2s ease;
+    }
+
+    .version-link:hover {
+        color: var(--accent);
+    }
+
+    .version-link svg {
+        opacity: 0.7;
     }
 
 </style>
