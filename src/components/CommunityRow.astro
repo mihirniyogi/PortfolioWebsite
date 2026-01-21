@@ -1,0 +1,64 @@
+---
+// src/components/CommunityRow.astro
+const { role, org, desc, date } = Astro.props;
+---
+<div class="community-row">
+    <div class="comm-info">
+        <span class="comm-role">{role}</span>
+        <span class="comm-org">{org}</span>
+        <p class="comm-desc">{desc}</p>
+    </div>
+    <span class="comm-date">{date}</span>
+</div>
+
+<style>
+    .community-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0 0.75rem 0;
+        border-bottom: 1px solid color-mix(in srgb, var(--text-main), transparent 92%);
+    }
+
+    .community-row:last-child {
+        padding: 0.75rem 0;
+        border-bottom: none;
+    }
+
+    .comm-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .comm-role {
+        font-weight: 600;
+        color: var(--text-main);
+        font-size: var(--fs-base);
+    }
+
+    .comm-org {
+        color: var(--accent);
+        font-size: var(--fs-sm);
+    }
+
+    .comm-date {
+        font-size: var(--fs-sm);
+        color: var(--text-muted);
+    }
+
+    .comm-desc {
+        font-size: var(--fs-sm);
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+        max-width: 50ch;
+        line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+        .community-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+    }
+</style>

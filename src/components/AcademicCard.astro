@@ -1,0 +1,70 @@
+---
+// src/components/AcademicCard.astro
+const { badge, title, org, description, period, isHighlight = false } = Astro.props;
+const formattedDescription = description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+---
+<div class={`academic-card ${isHighlight ? 'accolades-card' : ''}`}>
+    
+    <!-- Header -->
+    <div class="card-header">
+        <span class={`badge ${isHighlight ? 'highlight' : ''}`}>{badge}</span>
+        <h3>{title}</h3>
+        {org && <span class="org">{org}</span>}
+    </div>
+    
+    <!-- Description -->
+    {description && <p set:html={formattedDescription}></p>}
+    
+    <!-- Dates -->
+    {period && <span class="period">{period}</span>}
+     </div>
+
+<style>
+    .academic-card {
+        background: color-mix(in srgb, var(--text-main), transparent 97%);        
+        border: 1px solid color-mix(in srgb, var(--text-main), transparent 90%);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .academic-card :global(strong) {
+        color: var(--text-main);
+        font-weight: 700;
+    }
+
+    .badge {
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .academic-card h3 { 
+        font-size: var(--fs-md); margin-bottom: 0.25rem; 
+    }
+
+    .org {
+        font-size: var(--fs-sm);
+        color: var(--accent);
+        font-weight: 500;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .academic-card p {
+        font-size: var(--fs-sm);
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    .period {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-top: 1.5rem;
+    }
+</style>

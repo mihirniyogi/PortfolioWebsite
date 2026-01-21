@@ -1,0 +1,88 @@
+---
+// src/components/AccoladeCard.astro
+import { accolades } from '../data/experience';
+---
+<div class="accolade-card">
+    <div class="card-header">
+        <span class="badge highlight">Distinction</span>
+        <h3>Top Student Recognition</h3>
+    </div>
+    <div class="accolade-list">
+        {accolades.map(item => (
+        <div class="accolade-item">
+            <span class="module">{item.module}</span>
+            <p set:html={item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}></p>
+        </div>
+        ))}
+    </div>
+</div>
+
+<style>
+    .accolade-card {
+        grid-column: span 2;
+        background: color-mix(in srgb, var(--accent), transparent 96%);
+        border: 1px solid color-mix(in srgb, var(--accent), transparent 80%);
+        border-radius: 16px;
+        padding: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .accolade-card {
+            grid-column: span 1;
+        }
+    }
+
+    .accolade-card h3 {
+        font-size: var(--fs-md); margin-bottom: 0.25rem;
+    }
+
+    .badge {
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .badge.highlight {
+        color: var(--accent);
+    }
+
+    .accolade-list {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    .accolade-item {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+
+    .module {
+        background: var(--accent);
+        color: var(--bg-color);
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        min-width: 4rem;
+        text-align: center;
+    }
+
+    .accolade-item p {
+        font-size: var(--fs-sm);
+        color: var(--text-muted);
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    .accolade-item p :global(strong) {
+        color: var(--text-main);
+        font-weight: 700;
+    }
+
+</style>

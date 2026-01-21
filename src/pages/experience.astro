@@ -1,0 +1,96 @@
+---
+// src/pages/experience.astro
+import Layout from '../layouts/Layout.astro';
+import { academicLeadership } from '../data/experience';
+import { workExperience } from '../data/experience';
+import { communityInvolvement } from '../data/experience';
+import AccoladeCard from '../components/AccoladeCard.astro';
+import TimelineItem from '../components/TimelineItem.astro';
+import AcademicCard from '../components/AcademicCard.astro';
+import CommunityRow from '../components/CommunityRow.astro';
+---
+
+<Layout title="Experience | MN">
+
+    <main class="container">
+        
+       <section class="experience-section section">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                {workExperience.map(item => <TimelineItem {...item} />)}
+            </div>
+        </section>
+
+        <section class="academic-section section">
+            <h2 class="section-title">Academic Leadership & Accolades</h2>
+            <div class="academic-grid">
+                {academicLeadership.map(item => <AcademicCard {...item} />)}      
+                <AccoladeCard />
+            </div>
+        </section>
+
+        <section class="community-section section">
+            <h2 class="section-title">Community Involvement</h2>
+            <div class="community-list">
+                {communityInvolvement.map(item => <CommunityRow {...item} />)}
+            </div>
+        </section>
+
+    </main>
+
+</Layout>
+
+<style>
+    .section {
+        margin-top: 5rem;
+    }
+    
+    .section:first-child {
+        margin-top: 0;
+    }
+
+    .section:last-child {
+        margin-bottom: 5rem;
+    }
+    
+    .section-title {
+        text-transform: uppercase;
+        color: var(--accent);
+        font-size: var(--fs-sm);
+        letter-spacing: 0.1em;
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: color-mix(in srgb, var(--text-main), transparent 90%);
+    }
+
+    .academic-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .academic-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .community-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+</style>
