@@ -1,9 +1,11 @@
 ---
 // src/layouts/Layout.astro
-const { title } = Astro.props;
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const { title, showFooter = true } = Astro.props;
 ---
 
 <html lang="en">
@@ -16,6 +18,7 @@ import Navigation from '../components/Navigation.astro';
 
     <body>
         <Navigation />
-        <main><slot /></main>
+        <main> <slot /> </main>
+        {showFooter && <Footer />}
     </body>
 </html> 

@@ -1,3 +1,5 @@
+// src/data/experience.ts
+
 export const workExperience = [
   {
     title: "Full Stack Web Developer",

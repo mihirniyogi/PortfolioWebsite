@@ -14,14 +14,14 @@ import CommunityRow from '../components/CommunityRow.astro';
 
     <main class="container">
         
-       <section class="experience-section">
+       <section class="experience-section section">
             <h2 class="section-title">Professional Experience</h2>
             <div class="timeline">
                 {workExperience.map(item => <TimelineItem {...item} />)}
             </div>
         </section>
 
-        <section class="academic-section">
+        <section class="academic-section section">
             <h2 class="section-title">Academic Leadership & Accolades</h2>
             <div class="academic-grid">
                 {academicLeadership.map(item => <AcademicCard {...item} />)}      
@@ -29,7 +29,7 @@ import CommunityRow from '../components/CommunityRow.astro';
             </div>
         </section>
 
-        <section class="community-section">
+        <section class="community-section section">
             <h2 class="section-title">Community Involvement</h2>
             <div class="community-list">
                 {communityInvolvement.map(item => <CommunityRow {...item} />)}
@@ -41,6 +41,18 @@ import CommunityRow from '../components/CommunityRow.astro';
 </Layout>
 
 <style>
+    .section {
+        margin-top: 5rem;
+    }
+    
+    .section:first-child {
+        margin-top: 0;
+    }
+
+    .section:last-child {
+        margin-bottom: 5rem;
+    }
+    
     .section-title {
         text-transform: uppercase;
         color: var(--accent);
@@ -64,10 +76,6 @@ import CommunityRow from '../components/CommunityRow.astro';
         background: color-mix(in srgb, var(--text-main), transparent 90%);
     }
 
-    .academic-section {
-        margin-top: 4rem;
-    }
-
     .academic-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -78,11 +86,6 @@ import CommunityRow from '../components/CommunityRow.astro';
         .academic-grid {
             grid-template-columns: 1fr;
         }
-    }   
-
-    .community-section {
-        margin-top: 4rem;
-        margin-bottom: 4rem;
     }
 
     .community-list {
